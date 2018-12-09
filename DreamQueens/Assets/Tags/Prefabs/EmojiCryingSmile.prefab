@@ -1084,8 +1084,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85b4cd03c1b9c4d649534cf3206fb3a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  offset: 1.5
-  speed: 1
+  offset: 1.1
+  speed: 0.1
   isSelected: 0
   sfx:
   - {fileID: 8300000, guid: 19a5a79871b50499fab734912e8af42e, type: 3}

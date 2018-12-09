@@ -37,7 +37,7 @@ public class TagPopper : MonoBehaviour {
     IEnumerator PopOn()
     {
         transform.localScale = stSc;
-        Vector3 dest = stSc * offset*1.5f;
+        Vector3 dest = stSc * offset*1.1f;
         while(Vector3.Distance(transform.localScale, dest)>.1f)
         {
             transform.localScale += Vector3.one*speed * Time.deltaTime;
