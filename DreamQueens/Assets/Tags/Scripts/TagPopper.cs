@@ -9,13 +9,14 @@ public class TagPopper : MonoBehaviour {
     public float speed;
     Vector3 stSc;
 
-    bool expanded;
+    public bool isSelected;
 
 	// Use this for initialization
 	void Start () {
         stSc = transform.localScale;
 		
 	}
+
     public void Pop(bool popOn)
     {
         
@@ -23,7 +24,7 @@ public class TagPopper : MonoBehaviour {
         {
             transform.localScale = stSc / offset;
         }
-        else if(popOn && !expanded)
+        else if(popOn && !isSelected)
         {
             StartCoroutine(PopOn());
         }
@@ -45,7 +46,7 @@ public class TagPopper : MonoBehaviour {
         }
 
         transform.localScale = stSc * offset;
-        expanded = true;
+        isSelected = true;
         GetComponent<TagController>().SetState(true);
     }
 
@@ -53,7 +54,7 @@ public class TagPopper : MonoBehaviour {
     {
         StopAllCoroutines();
         transform.localScale = stSc;
-        expanded = false;
+        isSelected = false;
         GetComponent<TagController>().SetState(false);
     }
 }
