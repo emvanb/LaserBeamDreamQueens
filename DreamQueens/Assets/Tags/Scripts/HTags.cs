@@ -41,6 +41,7 @@ public struct TagParams
     public string content;
     public int tIndex;
     public int location;
-    public int hashIndent;
+    public string hashTag;
     public string timeStamp;
+    public int emojiIndex;
 }

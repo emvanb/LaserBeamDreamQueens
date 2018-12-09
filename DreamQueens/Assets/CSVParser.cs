@@ -33,6 +33,8 @@ public class CSVParser : MonoBehaviour
 
             for (int i = 0; i < fields.Length; i++)
             {
+                nParam.emojiIndex = -1;
+
                 //TIME
                 if(i==0)
                 {
@@ -42,11 +44,17 @@ public class CSVParser : MonoBehaviour
                 //COMMENT
                 if (i == 1)
                 {
-                    Debug.Log("FOUND #" + fields[i].IndexOf("#", System.StringComparison.CurrentCulture));
                     string tS = fields[i].Substring(fields[i].IndexOf("#", System.StringComparison.CurrentCulture) + 1);
-                    int trim = tS.IndexOf(" ", System.StringComparison.CurrentCulture);
+                    int trim = tS.IndexOf(" ", System.StringComparison.Ordinal);
+                    if(trim<0)
+                    {
+                        trim = tS.Length;
+                    }
 
-                    nParam.content = fields[i].Substring(fields[i].IndexOf("#", System.StringComparison.CurrentCulture)+1);
+                    Debug.Log("FOUND SPACE" + trim);
+                    string nS = fields[i].Substring(fields[i].IndexOf("#", System.StringComparison.CurrentCulture) + 1, trim);
+                    nParam.hashTag = nS;
+                    nParam.content = fields[i];
                 }
                 //LOCATION
                 if (i == 2)
@@ -58,13 +66,18 @@ public class CSVParser : MonoBehaviour
                 {
                     nParam.uName = fields[i];
                 }
+                //NAME
+                if (i == 4)
+                {
+                    nParam.emojiIndex = int.Parse(fields[i]);
+                }
             }
             tParam.Add(nParam);
         }
 
         foreach(TagParams p in tParam)
         {
-           //TagManager.tMan.PopulateTags(p);
+           TagManager.tMan.PopulateTags(p);
         }
     }
 

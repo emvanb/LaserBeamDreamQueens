@@ -34,6 +34,7 @@ public class LocationIdentifier : MonoBehaviour {
                 clean = false;
 
             tag.transform.localPosition = randLoc();
+                i--;
             }
             else
             {
