@@ -8,7 +8,6 @@ public class BillboardLabels : MonoBehaviour {
 	void Update () {
 
         var rot = Quaternion.LookRotation(transform.position - Camera.main.transform.position, Vector3.up);
-        Quaternion.Lerp(transform.localRotation, TagController.ExtractYaw(rot), Time.deltaTime);
-
+        transform.localRotation = Quaternion.Lerp(transform.localRotation, TagController.ExtractYaw(rot), Time.deltaTime);
     }
 }

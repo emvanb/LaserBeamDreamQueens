@@ -4,10 +4,8 @@ using UnityEngine;
 
 public class TagPopper : MonoBehaviour
 {
-
-
-    public float offset;
-    public float speed;
+    private float offset = 1.1f;
+    private float speed = 0.01f;
     Vector3 stSc;
 
     public bool isSelected;
@@ -20,7 +18,8 @@ public class TagPopper : MonoBehaviour
     {
         stSc = transform.localScale;
         src = GetComponent<AudioSource>();
-
+        src.volume = 0.1f;
+        
     }
 
     public void Pop(bool popOn)
@@ -28,7 +27,7 @@ public class TagPopper : MonoBehaviour
 
         if (!popOn)
         {
-            //transform.localScale = stSc / offset;
+            transform.localScale = stSc / offset;
         }
         else if (popOn && !isSelected)
         {
@@ -38,21 +37,21 @@ public class TagPopper : MonoBehaviour
 
     IEnumerator PopOn()
     {
-        //transform.localScale = stSc;
-        //Vector3 dest = stSc * offset*1.1f;
-        //while(Vector3.Distance(transform.localScale, dest)>.1f)
-        //{
-        //    transform.localScale += Vector3.one*speed * Time.deltaTime;
-        //    yield return null;
-        //}
-        //while (Vector3.Distance(transform.localScale, stSc * offset) > .1f)
-        //{
-        //    transform.localScale -= Vector3.one * speed *2* Time.deltaTime;
-        //    yield return null;
-        //}
+        transform.localScale = stSc;
+        Vector3 dest = stSc * offset*1.1f;
+        while(Vector3.Distance(transform.localScale, dest)>.1f)
+        {
+            transform.localScale += Vector3.one*speed * Time.deltaTime;
+            yield return null;
+        }
+        while (Vector3.Distance(transform.localScale, stSc * offset) > .1f)
+        {
+            transform.localScale -= Vector3.one * speed *2* Time.deltaTime;
+            yield return null;
+        }
 
-        //src.PlayOneShot(sfx[0]);
-        //transform.localScale = stSc * offset;
+        src.PlayOneShot(sfx[0]);
+        transform.localScale = stSc * offset;
         isSelected = true;
         GetComponent<TagController>().SetState(true);
         yield return null;
@@ -60,8 +59,8 @@ public class TagPopper : MonoBehaviour
 
     public void Contract()
     {
-        //StopAllCoroutines();
-        //transform.localScale = stSc;
+        StopAllCoroutines();
+        transform.localScale = stSc;
         isSelected = false;
         GetComponent<TagController>().SetState(false);
     }

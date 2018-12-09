@@ -6,8 +6,10 @@ public class TagSelector : MonoBehaviour {
 
     public LayerMask mask;
     TagPopper curPopper;
+    Transform curs;
 	// Use this for initialization
 	void Start () {
+        curs = transform.GetChild(0);
 		
 	}
 	
@@ -26,7 +28,7 @@ public class TagSelector : MonoBehaviour {
         if (Physics.SphereCast(transform.position, .1f, transform.forward,out ry))
         {
             var newPopper = ry.collider.GetComponent<TagPopper>();
-
+            curs.position = ry.point;
             // Youre looking at a new thing that is not a Popper
             if (newPopper == null)
             {
@@ -53,10 +55,14 @@ public class TagSelector : MonoBehaviour {
             }
         }
 
-        // You're not hitting anything now
-        else if(curPopper!=null)
+        else
         {
-            ClearCurrentPopper();
+            if (curPopper != null)
+            {
+                ClearCurrentPopper();
+            }
+
+            curs.position = transform.forward * 3f;
         }
     }
 }
