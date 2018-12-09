@@ -7,7 +7,7 @@ public class TagManager : MonoBehaviour {
     public List<LocationIdentifier> Locations;
     public GameObject tagPrefab;
     public List<GameObject> emojiPrefabs;
-    List<TagController> curTags;
+    List<TagController> curTags = new List<TagController>();
 
     Dictionary<string, Color> hashColor = new Dictionary<string, Color>();
 
@@ -70,10 +70,11 @@ public class TagManager : MonoBehaviour {
         //
 
 
-
+        tParams.tIndex = curTags.Count;
         GameObject nTag = Instantiate(tagPrefab);
 
         TagController tg = nTag.GetComponent<TagController>();
+        curTags.Add(tg);
         tg.tagParams = tParams;
 
         curLoc(tParams.location).PositionAtLocation(tg.transform);

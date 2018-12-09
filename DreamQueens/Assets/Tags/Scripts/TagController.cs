@@ -6,6 +6,7 @@ public class TagController : HTags {
 
     private TagPopper tagPopper;
     private Quaternion myOffset;
+    public float speed;
 
     private void Start()
     {

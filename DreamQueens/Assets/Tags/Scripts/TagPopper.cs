@@ -11,9 +11,13 @@ public class TagPopper : MonoBehaviour {
 
     public bool isSelected;
 
+	public AudioClip[] sfx;
+    AudioSource src;
+
 	// Use this for initialization
 	void Start () {
         stSc = transform.localScale;
+        src = GetComponent<AudioSource>();
 		
 	}
 
@@ -45,6 +49,7 @@ public class TagPopper : MonoBehaviour {
             yield return null;
         }
 
+        src.PlayOneShot(sfx[0]);
         transform.localScale = stSc * offset;
         isSelected = true;
         GetComponent<TagController>().SetState(true);
