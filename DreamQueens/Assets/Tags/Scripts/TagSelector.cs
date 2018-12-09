@@ -11,42 +11,52 @@ public class TagSelector : MonoBehaviour {
 		
 	}
 	
+    private void ClearCurrentPopper()
+    {
+        curPopper.Contract();
+        curPopper = null;
+    }
 
     private void Update()
     {
         RaycastHit ry = new RaycastHit();
         Debug.DrawRay(transform.position, transform.forward*10f, Color.red);
 
+        // Youre looking at something
         if (Physics.SphereCast(transform.position, .1f, transform.forward,out ry))
         {
+            var newPopper = ry.collider.GetComponent<TagPopper>();
 
-            if(ry.collider.GetComponent<TagPopper>()==null && curPopper!=null)
+            // Youre looking at a new thing that is not a Popper
+            if (newPopper == null)
             {
-                curPopper.Contract();
-                curPopper = null;
-                return;
+                if(curPopper != null)
+                {
+                    ClearCurrentPopper();
+                }
             }
 
-
-            if(curPopper == null)
+            // Youre looking at a popper
+            else
             {
-                curPopper = ry.collider.GetComponent<TagPopper>();
-                curPopper.Pop(true);
-            }
-            else if(curPopper!= ry.collider.GetComponent<TagPopper>())
-            {
-                curPopper.Contract();
+                // It's a unique popper
+                if(curPopper != newPopper)
+                {
+                    if(curPopper != null)
+                    {
+                        ClearCurrentPopper();
+                    }
 
-                curPopper = ry.collider.GetComponent<TagPopper>();
-                curPopper.Pop(true);
-
+                    curPopper = newPopper;
+                    curPopper.Pop(true);
+                }
             }
         }
+
+        // You're not hitting anything now
         else if(curPopper!=null)
         {
-            curPopper.Contract();
-            curPopper = null;
-
+            ClearCurrentPopper();
         }
     }
 }

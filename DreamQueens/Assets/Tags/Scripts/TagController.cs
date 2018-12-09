@@ -32,7 +32,7 @@ public class TagController : HTags {
         transform.localRotation = Quaternion.Lerp(transform.localRotation, GetTargetRotation(), Time.deltaTime);
     }
 
-    private Quaternion ExtractYaw(Quaternion q)
+    public static Quaternion ExtractYaw(Quaternion q)
     {
         q.x = 0;
         q.z = 0;
