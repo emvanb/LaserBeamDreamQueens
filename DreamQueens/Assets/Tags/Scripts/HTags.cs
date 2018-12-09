@@ -24,6 +24,8 @@ abstract public class HTags : MonoBehaviour
     public TextMeshProUGUI nameText;
     public TextMeshProUGUI indexText;
     public TextMeshProUGUI timeText;
+    public Renderer mesh;
+    public ParticleSystem parts;
 
 
 

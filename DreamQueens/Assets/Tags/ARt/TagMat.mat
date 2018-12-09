@@ -75,5 +75,5 @@ Material:
     m_Colors:
     - _BaseColor: {r: 0, g: 0, b: 0, a: 1}
     - _Color: {r: 0, g: 0.5660378, b: 0.51134956, a: 1}
-    - _EmissionColor: {r: 0.5995722, g: 0, b: 1, a: 1}
+    - _EmissionColor: {r: 0.2264151, g: 0.2264151, b: 0.2264151, a: 1}
     - _WireColor: {r: 1, g: 1, b: 1, a: 1}
