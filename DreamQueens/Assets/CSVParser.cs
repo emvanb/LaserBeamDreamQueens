@@ -44,6 +44,11 @@ public class CSVParser : MonoBehaviour
                 //COMMENT
                 if (i == 1)
                 {
+                    if(fields[i] == (-1).ToString())
+                    {
+
+                    }
+
                     string tS = fields[i].Substring(fields[i].IndexOf("#", System.StringComparison.CurrentCulture) + 1);
                     int trim = tS.IndexOf(" ", System.StringComparison.Ordinal);
                     if(trim<0)
@@ -51,7 +56,6 @@ public class CSVParser : MonoBehaviour
                         trim = tS.Length;
                     }
 
-                    Debug.Log("FOUND SPACE" + trim);
                     string nS = fields[i].Substring(fields[i].IndexOf("#", System.StringComparison.CurrentCulture) + 1, trim);
                     nParam.hashTag = nS;
                     nParam.content = fields[i];
@@ -59,7 +63,9 @@ public class CSVParser : MonoBehaviour
                 //LOCATION
                 if (i == 2)
                 {
-                    nParam.location = int.Parse(fields[i]);
+                    int loc = int.Parse(fields[i].Substring(0, 1));
+                    Debug.Log("LOCATION " + loc);
+                    nParam.location = loc;
                 }
                 //NAME
                 if (i == 3)

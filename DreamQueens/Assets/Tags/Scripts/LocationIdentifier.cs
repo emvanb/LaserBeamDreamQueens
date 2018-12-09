@@ -15,7 +15,7 @@ public class LocationIdentifier : MonoBehaviour {
     public void PositionAtLocation(Transform tag)
     {
 
-
+        Debug.Log(tag.GetComponent<TagController>().tagParams.content);
             tag.transform.localScale *= Random.Range(.4f, 1f);
 
             tag.transform.localPosition = randLoc();
