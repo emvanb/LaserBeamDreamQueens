@@ -4,11 +4,23 @@ using UnityEngine;
 
 public class TagController : HTags {
 
+    private TagPopper tagPopper;
+
     private void Start()
     {
+        tagPopper = GetComponent<TagPopper>();
+
         var rot = Quaternion.LookRotation(transform.position- Camera.main.transform.position, Vector3.up);
         rot = ExtractYaw(rot);
         transform.localRotation = rot * Quaternion.AngleAxis(Random.RandomRange(-30f, 30f), Vector3.up);
+    }
+
+    private void Update()
+    {
+        if (tagPopper.isSelected)
+        {
+
+        }
     }
 
     private Quaternion ExtractYaw(Quaternion q)
