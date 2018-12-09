@@ -8,6 +8,8 @@ public class TagManager : MonoBehaviour {
     public GameObject tagPrefab;
     List<TagController> curTags;
 
+    Dictionary<int, Color> hashColor = new Dictionary<int, Color>();
+
     public int tempSpawnAmount;
 
     public static TagManager tMan;
@@ -25,7 +27,7 @@ public class TagManager : MonoBehaviour {
         {
             TagParams nParam = new TagParams();
             nParam.location = Random.Range(0, Locations.Count);
-            nParam.hashIndent = Random.Range(0, 5);
+            nParam.hashIndent = Random.Range(0, 6);
             nParam.tIndex = 0;
             nParam.content = "This is a test. You're valid";
             nParam.timeStamp = "12/01 1:40pm";
@@ -41,8 +43,25 @@ public class TagManager : MonoBehaviour {
 		
 	}
 	
-    void PopulateTags(TagParams tParams)
+    public void PopulateTags(TagParams tParams)
     {
+        Color nCol = new Color();
+
+
+        if(!hashColor.ContainsKey(tParams.hashIndent))
+        {
+            nCol = Random.ColorHSV(0,1,1,1,1,1);
+            hashColor.Add(tParams.hashIndent, nCol);
+        }
+        else
+        {
+            hashColor.TryGetValue(tParams.hashIndent, out nCol);
+        }
+
+
+        //
+
+
 
         GameObject nTag = Instantiate(tagPrefab);
 
@@ -51,6 +70,7 @@ public class TagManager : MonoBehaviour {
 
         curLoc(tParams.location).PositionAtLocation(tg.transform);
         tg.SetUpTag();
+        tg.SetColor(nCol);
 
     }
 

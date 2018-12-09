@@ -37,7 +37,7 @@ public class ObjectFloat : MonoBehaviour {
         {
             transform.localPosition += Vector3.up * nS * Time.deltaTime;
 
-            transform.localScale -= Vector3.one * nS/2 * Time.deltaTime;
+            transform.localScale -= Vector3.one * nS/4 * Time.deltaTime;
             yield return null;
         }
 
@@ -54,7 +54,7 @@ public class ObjectFloat : MonoBehaviour {
         while (Vector3.Distance(transform.localPosition, dest) > .01f)
         {
             transform.localPosition -= Vector3.up * nS * Time.deltaTime;
-            transform.localScale += Vector3.one * nS/2 * Time.deltaTime;
+            transform.localScale += Vector3.one * nS/4 * Time.deltaTime;
             yield return null;
         }
 
