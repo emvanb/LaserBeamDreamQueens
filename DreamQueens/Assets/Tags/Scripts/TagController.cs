@@ -4,8 +4,23 @@ using UnityEngine;
 
 public class TagController : HTags {
 
+    private void Start()
+    {
+        var rot = Quaternion.LookRotation(transform.position- Camera.main.transform.position, Vector3.up);
+        rot = ExtractYaw(rot);
+        transform.localRotation = rot * Quaternion.AngleAxis(Random.RandomRange(-30f, 30f), Vector3.up);
+    }
 
+    private Quaternion ExtractYaw(Quaternion q)
+    {
+        q.x = 0;
+        q.z = 0;
+        float mag = Mathf.Sqrt(q.w * q.w + q.y * q.y);
+        q.w /= mag;
+        q.y /= mag;
 
+        return q;
+    }
 
     public void SetUpTag()
     {
